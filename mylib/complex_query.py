@@ -45,7 +45,8 @@ def complex_query():
     # aggregation and sort
     c.execute("""
         SELECT a.country,
-            SUM(a.beer_sevrings + a.spirit_servings + a.wine_servings) AS total_alcohol_consumption
+            SUM(a.beer_sevrings + a.spirit_servings + a.wine_servings) 
+            AS total_alcohol_consumption
         FROM
             alcoholDB AS a
         GROUP BY
@@ -59,7 +60,7 @@ def complex_query():
     
     
     
-    # log_query(f"")
+    log_query("Complex Query")
     
     return result
 

@@ -96,7 +96,7 @@ def test_read_data():
 
 def test_complex_query():
     result = subprocess.run(
-        ["python", "main.py", "complex"]
+        ["python", "main.py", "complex"],
         capture_output=True,
         text=True,
         check=True,
