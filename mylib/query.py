@@ -103,3 +103,5 @@ def delete_record(record_id):
     conn.close()
 
     log_query(f"DELETE FROM alcoholDB WHERE id={record_id};")
+    
+    
