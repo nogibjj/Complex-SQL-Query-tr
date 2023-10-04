@@ -11,6 +11,7 @@ from mylib.query import (
     create_record,
     read_data,
 )
+from mylib.complex_query import complex_query
 
 def handle_arguments(args):
     """add action based on inital calls"""
@@ -24,6 +25,7 @@ def handle_arguments(args):
             "delete_record",
             "create_record",
             "read_data",
+            "complex"
         ],
     )
     
@@ -94,6 +96,12 @@ def main():
         data = read_data()
         print(data)
         
+        
+    elif args.action == 'complex':
+        # result = complex_query()
+        # print(result)
+        # print(type(result))
+        complex_query()
         
     else:
         print("Unknown action")

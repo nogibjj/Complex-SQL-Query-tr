@@ -94,6 +94,17 @@ def test_read_data():
     assert result.returncode == 0
 
 
+def test_complex_query():
+    result = subprocess.run(
+        ["python", "main.py", "complex"]
+        capture_output=True,
+        text=True,
+        check=True,
+    )
+    assert result.returncode == 0
+    assert result[0] == 'Andorra'
+    assert result[1] == 695
+
 if __name__ == "__main__":
     test_extract()
     test_transform_load()
@@ -101,3 +112,5 @@ if __name__ == "__main__":
     test_read_data()
     test_update_record()
     test_delete_record()
+    
+    test_complex_query()
