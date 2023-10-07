@@ -53,39 +53,6 @@ def load(dataset="data/alcohol.csv", dataset1="data/toy.csv"):
             for _, row in df2.iterrows():
                 convert = (_,) + tuple(row)
                 c.execute(f"INSERT INTO toyDB VALUES {convert}")
-        c.close()
+    c.close()
 
     return "success"
-    
-    
-    
-    
-    conn = sqlite3.connect('alcoholDB.db')
-    c = conn.cursor()
-    c.execute("DROP TABLE IF EXISTS alcoholDB")
-    c.execute("""
-              CREATE TABLE alcoholDB (
-                    id INTEGER PRIMARY KEY AUTOINCREMENT,
-                    country TEXT, 
-                    beer_sevrings INTEGER,
-                    spirit_servings INTEGER,
-                    wine_servings INTEGER,
-                    total_pure_alcohol
-                  )
-              """)
-    #insert
-    c.executemany("""
-                  INSERT INTO alcoholDB (
-                        country, 
-                        beer_sevrings,
-                        spirit_servings,
-                        wine_servings,
-                        total_pure_alcohol
-                      ) 
-                      VALUES (?, ?, ?, ?, ?)
-                  """, 
-                  payload)
-    conn.commit()
-    conn.close()
-    return "alcoholDB.db"
-

@@ -43,7 +43,8 @@ def test_general_query():
             INNER JOIN toyDB AS t ON a.id = t.id;
 
             SELECT a.country,
-                SUM(a.beer_servings + a.spirit_servings + a.wine_servings) AS total_alcohol_consumption
+                SUM(a.beer_servings + a.spirit_servings + a.wine_servings) 
+                AS total_alcohol_consumption
             FROM alcoholDB AS a
             GROUP BY a.country
             ORDER BY total_alcohol_consumption DESC;
