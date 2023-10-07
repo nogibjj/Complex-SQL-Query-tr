@@ -25,17 +25,17 @@ def load(dataset="data/alcohol.csv", dataset1="data/toy.csv"):
         result = c.fetchall()
         if not result:
             c.execute(
-                    """
-                    CREATE TABLE alcoholDB (
-                        id INTEGER PRIMARY KEY,
-                        country TEXT, 
-                        beer_sevrings INTEGER,
-                        spirit_servings INTEGER,
-                        wine_servings INTEGER,
-                        total_pure_alcohol
-                    )
                 """
+                CREATE TABLE alcoholDB (
+                    id int,
+                    country string, 
+                    beer_servings int,
+                    spirit_servings int,
+                    wine_servings int,
+                    total_pure_alcohol real
                 )
+                """
+            )
             for _, row in df.iterrows():
                 convert = (_,) + tuple(row)
                 c.execute(f"INSERT INTO alcoholDB VALUES {convert}")
@@ -45,8 +45,8 @@ def load(dataset="data/alcohol.csv", dataset1="data/toy.csv"):
             c.execute(
                     """
                     CREATE TABLE IF NOT EXISTS ToyDB (
-                        id INTEGER PRIMARY KEY,
-                        value INTEGER
+                        id int,
+                        value int
                     )
                     """
             )
