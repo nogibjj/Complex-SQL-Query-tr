@@ -30,5 +30,5 @@ def general_query(query):
         c = connection.cursor()
         c.execute(query)
         result = c.fetchall()
-
+    c.close()
     log_query(f"{query}", result)
