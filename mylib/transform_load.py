@@ -23,37 +23,36 @@ def load(dataset="data/alcohol.csv", dataset1="data/toy.csv"):
         c = connection.cursor()
         c.execute("SHOW TABLES FROM default LIKE 'alcohol*'")
         result = c.fetchall()
-    if not result:
+        if not result:
             c.execute(
+                    """
+                    CREATE TABLE alcoholDB (
+                        id INTEGER PRIMARY KEY,
+                        country TEXT, 
+                        beer_sevrings INTEGER,
+                        spirit_servings INTEGER,
+                        wine_servings INTEGER,
+                        total_pure_alcohol
+                    )
                 """
-                CREATE TABLE alcoholDB (
-                    id INTEGER PRIMARY KEY AUTOINCREMENT,
-                    country TEXT, 
-                    beer_sevrings INTEGER,
-                    spirit_servings INTEGER,
-                    wine_servings INTEGER,
-                    total_pure_alcohol
                 )
-            """
-            )
             for _, row in df.iterrows():
                 convert = (_,) + tuple(row)
                 c.execute(f"INSERT INTO alcoholDB VALUES {convert}")
-    
-    c.execute("SHOW TABLES FROM default LIKE 'toy*'")
-    result = c.fetchall()
-    if not result:
+        c.execute("SHOW TABLES FROM default LIKE 'toy*'")
+        result = c.fetchall()
+        if not result:
             c.execute(
-                """
-                CREATE TABLE IF NOT EXISTS ToyDB (
-                    id INTEGER,
-                    value INTEGER
-                )
-                """
+                    """
+                    CREATE TABLE IF NOT EXISTS ToyDB (
+                        id INTEGER PRIMARY KEY,
+                        value INTEGER
+                    )
+                    """
             )
             for _, row in df2.iterrows():
                 convert = (_,) + tuple(row)
                 c.execute(f"INSERT INTO toyDB VALUES {convert}")
-    c.close()
+        c.close()
 
     return "success"
