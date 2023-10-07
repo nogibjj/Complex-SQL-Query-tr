@@ -7,9 +7,11 @@ import pandas as pd
 from dotenv import load_dotenv
 
 #load the csv file and insert into a new sqlite3 database
-def load(dataset="data/alcohol.csv", dataset1="data/toy.csv"):
+def load(dataset="data/alcohol.csv"):
     df = pd.read_csv(dataset, delimiter=",", skiprows=1)
-    df2 = pd.read_csv(dataset1)
+    # print(df)
+    # df2 = pd.read_csv(dataset1)
+    df2 = pd.DataFrame(range(1,101), columns=['value'])
     load_dotenv()
     server_h = os.getenv("SERVER_HOSTNAME")
     # print(server_h)
@@ -28,17 +30,18 @@ def load(dataset="data/alcohol.csv", dataset1="data/toy.csv"):
             c.execute(
                 """
                 CREATE TABLE alcoholDB (
+                    id int,
                     country string, 
                     beer_servings int,
                     spirit_servings int,
                     wine_servings int,
-                    total_pure_alcohol real,
-                    id int
+                    total_pure_alcohol real
+                    
                 )
                 """
             )
-            for row in df.iterrows():
-                convert = tuple(row)
+            for _, row in df.iterrows():
+                convert = (_,) + tuple(row)
                 print(convert)
                 c.execute(f"INSERT INTO alcoholDB VALUES {convert}")
         c.execute("SHOW TABLES FROM default LIKE 'toy*'")
@@ -55,7 +58,7 @@ def load(dataset="data/alcohol.csv", dataset1="data/toy.csv"):
                     """
             )
             for _, row in df2.iterrows():
-                convert = tuple(row)
+                convert = (_,) + tuple(row)
                 c.execute(f"INSERT INTO toyDB VALUES {convert}")
         c.close()
 

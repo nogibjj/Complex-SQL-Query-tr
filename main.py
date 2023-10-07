@@ -4,7 +4,7 @@ import argparse
 from mylib.extract import extract
 from mylib.transform_load import load
 from mylib.query import (
-    general_query,
+    general_query
 )
 
 
