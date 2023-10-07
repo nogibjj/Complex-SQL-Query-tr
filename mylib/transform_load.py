@@ -17,6 +17,7 @@ def load(dataset="data/alcohol.csv"):
     # print(server_h)
     access_token = os.getenv("ACCESS_TOKEN")
     http_path = os.getenv("HTTP_PATH")
+    print(server_h, access_token, http_path)
     with sql.connect(
         server_hostname=server_h,
         http_path=http_path,
