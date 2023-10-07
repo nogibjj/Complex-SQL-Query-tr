@@ -12,6 +12,7 @@ def load(dataset="data/alcohol.csv", dataset1="data/toy.csv"):
     df2 = pd.read_csv(dataset1)
     load_dotenv()
     server_h = os.getenv("SERVER_HOSTNAME")
+    # print(server_h)
     access_token = os.getenv("ACCESS_TOKEN")
     http_path = os.getenv("HTTP_PATH")
     with sql.connect(
