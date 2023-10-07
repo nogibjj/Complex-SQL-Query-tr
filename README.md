@@ -7,3 +7,5 @@ Week 6 Mini-Project
 Tianji Rao
 
 ## Purpose
+
+## Workflow
