@@ -47,4 +47,4 @@ transform_load:
 
 query:
 	# using delete query as an example
-	python main.py delete_record 10
+	python main.py general_query """SELECT a.*, t.* FROM alcoholDB AS a INNER JOIN toyDB AS t ON a.id = t.id; SELECT a.country, SUM(a.beer_servings + a.spirit_servings + a.wine_servings) AS total_alcohol_consumption FROM alcoholDB AS a GROUP BY a.country ORDER BY total_alcohol_consumption DESC LIMIT 1;"""

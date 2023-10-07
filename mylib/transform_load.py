@@ -21,26 +21,30 @@ def load(dataset="data/alcohol.csv", dataset1="data/toy.csv"):
         access_token=access_token,
     ) as connection:
         c = connection.cursor()
+        c.execute("DROP TABLE IF EXISTS alcoholDB")
         c.execute("SHOW TABLES FROM default LIKE 'alcohol*'")
-        result = c.fetchall()
+        result = None
         if not result:
             c.execute(
                 """
                 CREATE TABLE alcoholDB (
-                    id int,
                     country string, 
                     beer_servings int,
                     spirit_servings int,
                     wine_servings int,
-                    total_pure_alcohol real
+                    total_pure_alcohol real,
+                    id int
                 )
                 """
             )
-            for _, row in df.iterrows():
-                convert = (_,) + tuple(row)
+            for row in df.iterrows():
+                convert = tuple(row)
+                print(convert)
                 c.execute(f"INSERT INTO alcoholDB VALUES {convert}")
         c.execute("SHOW TABLES FROM default LIKE 'toy*'")
-        result = c.fetchall()
+        # result = c.fetchall()
+        c.execute("DROP TABLE IF EXISTS toyDB")
+        result = None
         if not result:
             c.execute(
                     """
@@ -51,7 +55,7 @@ def load(dataset="data/alcohol.csv", dataset1="data/toy.csv"):
                     """
             )
             for _, row in df2.iterrows():
-                convert = (_,) + tuple(row)
+                convert = tuple(row)
                 c.execute(f"INSERT INTO toyDB VALUES {convert}")
         c.close()
 
