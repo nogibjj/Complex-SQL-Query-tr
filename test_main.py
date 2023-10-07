@@ -61,4 +61,4 @@ if __name__ == "__main__":
     test_transform_load()
 
     # complex query
-    test_complex_query()
+    test_general_query()
