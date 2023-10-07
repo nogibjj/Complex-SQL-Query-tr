@@ -61,6 +61,7 @@ def load(dataset="data/alcohol.csv"):
             for _, row in df2.iterrows():
                 convert = (_,) + tuple(row)
                 c.execute(f"INSERT INTO toyDB VALUES {convert}")
+        print("success")
         c.close()
 
     return "success"
