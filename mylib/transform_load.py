@@ -23,9 +23,10 @@ def load(dataset="data/alcohol.csv"):
         access_token=access_token,
     ) as connection:
         c = connection.cursor()
-        c.execute("DROP TABLE IF EXISTS alcoholDB")
+        # c.execute("DROP TABLE IF EXISTS alcoholDB")
         c.execute("SHOW TABLES FROM default LIKE 'alcohol*'")
-        result = None
+        result = c.fetchall()
+        # result = None
         if not result:
             c.execute(
                 """
@@ -45,9 +46,9 @@ def load(dataset="data/alcohol.csv"):
                 print(convert)
                 c.execute(f"INSERT INTO alcoholDB VALUES {convert}")
         c.execute("SHOW TABLES FROM default LIKE 'toy*'")
-        # result = c.fetchall()
-        c.execute("DROP TABLE IF EXISTS toyDB")
-        result = None
+        result = c.fetchall()
+        # c.execute("DROP TABLE IF EXISTS toyDB")
+        # result = None
         if not result:
             c.execute(
                     """

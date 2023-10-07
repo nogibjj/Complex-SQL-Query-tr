@@ -38,7 +38,8 @@ def test_general_query():
             "general_query",
             """
             SELECT a.country,
-                SUM(a.beer_servings + a.spirit_servings + a.wine_servings) AS total_alcohol_consumption
+                SUM(a.beer_servings + a.spirit_servings + a.wine_servings) 
+                AS total_alcohol_consumption
             FROM default.alcoholDB AS a
             INNER JOIN default.toyDB AS t ON a.id = t.id
             GROUP BY a.country
