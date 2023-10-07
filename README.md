@@ -34,7 +34,7 @@ This is a SQL query that selects data from two tables, "alcoholDB" and "toyDB," 
 ## Expected Output
 
 
-|country|total_alcohol_consumption|
+|rank|country|total_alcohol_consumption|
 |:--:|:------------:|:----:|
 |1|Andorra|695|
 |2|Grenada|665|
