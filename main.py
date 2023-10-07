@@ -1,17 +1,12 @@
-"""
-ETL-Query script
-"""
+"""handles cli commands"""
 import sys
 import argparse
 from mylib.extract import extract
 from mylib.transform_load import load
 from mylib.query import (
-    update_record,
-    delete_record,
-    create_record,
-    read_data,
+    general_query,
 )
-from mylib.complex_query import complex_query
+
 
 def handle_arguments(args):
     """add action based on inital calls"""
@@ -24,32 +19,17 @@ def handle_arguments(args):
             "update_record",
             "delete_record",
             "create_record",
+            "general_query",
             "read_data",
-            "complex"
         ],
     )
-    
     args = parser.parse_args(args[:1])
     print(args.action)
-    
-    if args.action == "update_record":
-        parser.add_argument("record_id")
-        parser.add_argument("country")
-        parser.add_argument("beer_sevrings")
-        parser.add_argument("spirit_servings")
-        parser.add_argument("wine_servings")
-        parser.add_argument("total_pure_alcohol")
 
-    if args.action == "create_record":
-        parser.add_argument("country")
-        parser.add_argument("beer_sevrings")
-        parser.add_argument("spirit_servings")
-        parser.add_argument("wine_servings")
-        parser.add_argument("total_pure_alcohol")
+    if args.action == "general_query":
+        parser.add_argument("query")
 
-    if args.action == "delete_record":
-        parser.add_argument("record_id", type=int)
-
+    # parse again with ever
     return parser.parse_args(sys.argv[1:])
 
 
@@ -60,53 +40,15 @@ def main():
     if args.action == "extract":
         print("Extracting data...")
         extract()
-        
-        
     elif args.action == "transform_load":
         print("Transforming data...")
         load()
-        
-        
-    elif args.action == "update_record":
-        update_record(
-            args.record_id,
-            args.country,
-            args.beer_sevrings,
-            args.spirit_servings,
-            args.wine_servings,
-            args.total_pure_alcohol
-        )
-        
-        
-    elif args.action == "delete_record":
-        delete_record(args.record_id)
-        
-        
-    elif args.action == "create_record":
-        create_record(
-            args.country,
-            args.beer_sevrings,
-            args.spirit_servings,
-            args.wine_servings,
-            args.total_pure_alcohol
-        )
-        
-        
-    elif args.action == "read_data":
-        data = read_data()
-        print(data)
-        
-        
-    elif args.action == 'complex':
-        # result = complex_query()
-        # print(result)
-        # print(type(result))
-        complex_query()
-        
+    elif args.action == "general_query":
+        general_query(args.query)
+
     else:
-        print("Unknown action")
+        print(f"Unknown action: {args.action}")
 
 
 if __name__ == "__main__":
     main()
-
